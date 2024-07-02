@@ -1,0 +1,17 @@
+services:
+  jenkins:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    container_name: jenkins
+    image: jenkins
+    ports:
+      - 31940:8080
+      - 50000:50000
+    volumes:
+      - jenkins_home:/var/jenkins_home
+    restart: on-failure
+
+volumes:
+  jenkins_home:
+    external: true
