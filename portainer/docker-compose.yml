@@ -1,0 +1,22 @@
+services:
+  portainer:
+    image: portainer/portainer-ce:latest
+    container_name: portainer
+    ports:
+      - 9443:9443
+    volumes:
+      - portainer_data:/data
+      - /var/run/docker.sock:/var/run/docker.sock
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: '512M'
+        reservations:
+          cpus: '0.4'
+          memory: '256M'
+          
+volumes:
+  portainer_data:
+    external: true
