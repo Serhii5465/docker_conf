@@ -11,6 +11,8 @@ services:
     volumes:
       - jenkins_home:/var/jenkins_home
     restart: on-failure
+    environment:
+      - TZ=Europe/Kyiv
     deploy:
       resources:
         limits:
