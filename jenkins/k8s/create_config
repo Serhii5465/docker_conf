@@ -17,12 +17,12 @@ SECRET_NAME='jenkins-user-secret'
 SCRIPT_PATH=$(realpath $(dirname $0))
 FILE_SA='ServiceAccount.yaml'
 
-# if [ ! -f "${SCRIPT_PATH}/${FILE_SA}" ]; then
-#     echo "File ${FILE_SA} not exists"
-#     exit 1
-# fi
+if [ ! -f "${SCRIPT_PATH}/${FILE_SA}" ]; then
+    echo "File ${FILE_SA} does not exist"
+    exit 1
+fi
 
-# kubectl apply -f $FILE_SA
+kubectl apply -f $FILE_SA
 
 CA=$(kubectl get secret --namespace="$NAMESPACE" "$SECRET_NAME" -o=jsonpath='{.data.ca\.crt}')
 TOKEN=$(kubectl get secret --namespace="$NAMESPACE" "$SECRET_NAME" -o=jsonpath='{.data.token}' | base64 --decode)
