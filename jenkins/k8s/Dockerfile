@@ -1,4 +1,4 @@
-FROM jenkins/jenkins:2.467-jdk21
+FROM jenkins/jenkins:2.468-jdk21
 
 ARG DOCKER_GID
 
