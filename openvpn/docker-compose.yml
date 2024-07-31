@@ -1,0 +1,24 @@
+services:
+  openvpn:
+    image: openvpn/openvpn-as:2.14.0-b90cb316-Ubuntu22
+    container_name: openvpn-as
+    volumes:
+      - openvpn_volume:/openvpn
+    cap_add:
+      - NET_ADMIN
+    ports:
+      - 943:943
+      - 443:443
+      - 1194:1194/udp
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: '512M'
+        reservations:
+          cpus: '0.5'
+          memory: '256M'
+
+volumes:
+  openvpn_volume:
+    external: true
