@@ -1,6 +1,6 @@
 services:
   portainer:
-    image: portainer/portainer-ce:latest
+    image: portainer/portainer-ce:2.20.3-alpine
     container_name: portainer
     ports:
       - 9443:9443
@@ -11,10 +11,10 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '1.0'
+          cpus: '0.5'
           memory: '512M'
         reservations:
-          cpus: '0.4'
+          cpus: '0.2'
           memory: '256M'
           
 volumes:
