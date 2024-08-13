@@ -1,0 +1,31 @@
+services:
+  pihole:
+    container_name: pihole
+    image: pihole/pihole:2024.07.0
+    environment:
+      - TZ=Europe/Kyiv
+    restart: unless-stopped
+    ports:
+      - 53:53/tcp
+      - 53:53/udp
+      - 67:67/udp
+      - 26541:80/tcp
+    cap_add:
+      - NET_ADMIN
+    volumes:
+      - pihole-etc:/etc/pihole
+      - pihole-dnsmasq:/etc/dnsmasq.d
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: '768M'
+        reservations:
+          cpus: '0.5'
+          memory: '512M'
+
+volumes:
+  pihole-etc:
+    external: true
+  pihole-dnsmasq:
+    external: true
