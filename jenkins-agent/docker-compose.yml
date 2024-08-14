@@ -1,0 +1,28 @@
+services:
+  jenkins:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    image: jenkins
+    container_name: jenkins-agent
+    volumes:
+      - jenkins_agent_workdir:/home/jenkins/agent
+      - /home/raisnet:/data
+    environment:
+      - TZ=Europe/Kyiv
+      - NAME_AGENT=NAME_AGENT
+      - SECRET=SECRET
+      - URL_JENKINS_SERVER=URL_JENKINS_SERVER
+    command: java -jar /usr/share/jenkins/agent.jar -workDir /home/jenkins/agent -webSocket -url $URL_JENKINS_SERVER -secret $SECRET -name $NAME_AGENT
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: '256M'
+        reservations:
+          cpus: '0.3'
+          memory: '128M'
+          
+volumes:
+  jenkins_agent_workdir:
+    external: true
