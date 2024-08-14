@@ -19,10 +19,10 @@ services:
       resources:
         limits:
           cpus: '1.0'
-          memory: '768M'
+          memory: '512M'
         reservations:
           cpus: '0.5'
-          memory: '512M'
+          memory: '256M'
 
 volumes:
   pihole-etc:
