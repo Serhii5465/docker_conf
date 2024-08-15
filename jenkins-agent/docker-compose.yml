@@ -5,6 +5,7 @@ services:
       dockerfile: Dockerfile
     image: jenkins
     container_name: jenkins-agent
+    restart: always
     volumes:
       - jenkins_agent_workdir:/home/jenkins/agent
       - /home/raisnet:/data
