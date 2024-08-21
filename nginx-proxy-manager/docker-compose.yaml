@@ -6,19 +6,21 @@ services:
     ports:
       - 80:80
       - 443:443
-      - 26540:81 # Admin Web Port
+      - ${PORT}:81
     volumes:
       - npm-data:/data
       - npm-letsencrypt:/etc/letsencrypt
     environment:
       DISABLE_IPV6: true
+      PUID: 1000
+      PGID: 1000
     deploy:
       resources:
         limits:
-          cpus: '1.0'
-          memory: '512M'
-        reservations:
           cpus: '0.5'
+          memory: '384M'
+        reservations:
+          cpus: '0.3'
           memory: '256M'
 
 volumes:
