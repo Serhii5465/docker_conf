@@ -5,10 +5,10 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     ports:
-      - 32560:8080
+      - ${PORT}:8080
     restart: unless-stopped
     deploy:
       resources:
         limits:
-          cpus: '0.5'
-          memory: '128M'
+          cpus: '0.2'
+          memory: '64M'
