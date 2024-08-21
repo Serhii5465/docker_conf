@@ -3,11 +3,12 @@ services:
     build: 
       context: .
       dockerfile: Dockerfile
-    image: jenkins
+    image: jenkins:alpine3.20-jdk21
     container_name: jenkins-agent
     restart: always
     volumes:
       - jenkins_agent_workdir:/home/jenkins/agent
+      - jenkins_agent_home:/home/jenkins/.jenkins
       - /home/raisnet:/data
     environment:
       - TZ=Europe/Kyiv
@@ -25,5 +26,7 @@ services:
           memory: '128M'
           
 volumes:
+  jenkins_agent_home:
+    external: true
   jenkins_agent_workdir:
     external: true
