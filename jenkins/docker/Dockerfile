@@ -1,8 +1,13 @@
-FROM jenkins/jenkins:2.472-jdk21
+FROM jenkins/jenkins:alpine3.20-jdk21
 
 USER root
 
-RUN apt update && apt install -y --no-install-recommends nano iputils-ping \
-    && rm -rf /var/lib/apt/lists/* && apt-get clean
+ARG GID_DOCKER
+
+RUN apk update && apk add --no-cache nano docker iputils-ping shadow \
+    && groupmod -g ${GID_DOCKER} docker \
+    && usermod -aG docker jenkins
+
+WORKDIR /var/jenkins_home/
 
 USER jenkins
