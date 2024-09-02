@@ -1,0 +1,19 @@
+services:
+  app:
+    image: esperotech/yaade:latest
+    container_name: yaade
+    volumes:
+      - yaade:/app/data
+    ports:
+      - ${PORT}:9339
+    environment:
+      YAADE_ADMIN_USERNAME: ${YAADE_ADMIN_USERNAME}
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: '512M'
+
+volumes:
+  yaade:
+    external: true
