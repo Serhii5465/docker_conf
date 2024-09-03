@@ -1,4 +1,4 @@
-FROM portainer/portainer-ce:2.20.3-alpine
+FROM portainer/portainer-ce:2.21.0-alpine
 
 ARG USER_NAME
 ARG USER_ID
