@@ -8,14 +8,14 @@ services:
     restart: always
     volumes:
       - jenkins_agent_workdir:/home/jenkins/agent
-      - jenkins_agent_home:/home/jenkins/.jenkins
+      - jenkins_agent_data:/home/jenkins/.jenkins
       - /home/raisnet:/data
     environment:
       - TZ=Europe/Kyiv
       - NAME_AGENT=NAME_AGENT
       - SECRET=SECRET
       - URL_JENKINS_SERVER=URL_JENKINS_SERVER
-    command: java -jar /usr/share/jenkins/agent.jar -workDir /home/jenkins/agent -webSocket -url $URL_JENKINS_SERVER -secret $SECRET -name $NAME_AGENT
+    command: java -jar /usr/share/jenkins/agent.jar -webSocket -url $URL_JENKINS_SERVER -secret $SECRET -name $NAME_AGENT  
     deploy:
       resources:
         limits:
@@ -26,7 +26,7 @@ services:
           memory: '128M'
           
 volumes:
-  jenkins_agent_home:
-    external: true
   jenkins_agent_workdir:
+    external: true
+  jenkins_agent_data:
     external: true
